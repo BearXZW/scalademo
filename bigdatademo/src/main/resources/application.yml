@@ -1,0 +1,39 @@
+server:
+  port: 8081
+
+spring:
+  datasource:
+      type: com.alibaba.druid.pool.DruidDataSource
+#      使用Druid数据池
+      druid:
+      driver-classname-name: com.mysql.jdbc.Driver
+      name: bigdata
+      url: jdbc:mysql://127.0.0.1:3306/bigdata?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+      username: root
+      password: 123456
+      filter: stat
+      maxActive: 20
+      initialSize: 1
+      maxWait: 60000
+      minIdle: 1
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: select 'x'
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      maxOpenPreparedStatements: 20
+
+
+ # 配置mybatis的独立节点
+mybatis:
+    mapper-locations: classpath:mapping/*.xml   #注意：一定要对应mapper映射的xml方式的所在路径
+    type-aliases-package: com.sana.bigdata.model    #注意：对应实体类的路径
+
+#pagehelper分页插件
+pagehelper:
+    helperDialect: mysql
+    resasonable: true
+    support-methods-arguments: true
+    params: count-countSql
